@@ -14,8 +14,13 @@ public class MyBatisTest {
         session.close();
     }
 
+    static  void exp2(){
+        SqlSession session= SqlSessionFactoryUtil.getSession();
+        List<Emp> list=session.selectList("selectDept");
+        session.close();
 
+    }
     public static void main(String[] args) {
-        exp1();
+        exp2();
     }
 }

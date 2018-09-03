@@ -3,8 +3,8 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mbatis.pojo.Emp">
-    <select id="selectEmp" resultType="emp">
-      SELECT * FROM Emp
+<mapper namespace="com.mbatis.pojo.Dept">
+    <select id="selectDept" resultType="com.mbatis.pojo.Dept">
+      SELECT * FROM Dept
     </select>
 </mapper>

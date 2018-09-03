@@ -7,7 +7,9 @@
         <!-- 是否在控制台打印日志 -->
         <setting name="logImpl" value="STDOUT_LOGGING" />
     </settings>
-
+    <typeAliases>
+        <typeAlias type="com.mbatis.pojo.Emp" alias="emp"></typeAlias>
+    </typeAliases>
     <!-- 配置默认的数据库连接 -->
     <environments default="oracledb">
         <!-- 配置数据库连接信息 -->
@@ -36,6 +38,6 @@
 
     <mappers>
         <mapper resource="com/mbatis/mapper/EmpMapper.xml"></mapper>
-
+        <mapper resource="com/mbatis/mapper/DeptMapper.xml"></mapper>
     </mappers>
 </configuration>
