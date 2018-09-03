@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mbatis.dao.EmpDao">
+    <select id="getEmp" resultType="emp">
+        select * from emp where 1=1
+        <if test="ename !=null and ename!=''">
+            and ename like #{ename}
+        </if>
+        <if test="job !=null and job !=''">
+            and job = #{job}
+        </if>
+        <if test="sal!=null and sal gt 0">
+            and sal>=#{sal}
+        </if>
+    </select>
+</mapper>
