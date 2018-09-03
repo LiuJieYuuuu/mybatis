@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 开启全局二级缓存 -->
+        <!--<setting name="cacheEnabled" value="true"/>  -->
+        <!-- 是否在控制台打印日志 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+
+    <!-- 配置默认的数据库连接 -->
+    <environments default="oracledb">
+        <!-- 配置数据库连接信息 -->
+        <environment id="oracledb">
+            <transactionManager type="jdbc"></transactionManager>
+            <dataSource type="pooled">
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+                <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+                <property name="username" value="scott"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+
+        <!-- 配置数据库连接信息 -->
+        <environment id="mysqldb">
+            <transactionManager type="jdbc"></transactionManager>
+            <dataSource type="pooled">
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+                <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+                <property name="username" value="scott"/>
+                <property name="password" value="tiger"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+        <mapper resource="com/mbatis/mapper/EmpMapper.xml"></mapper>
+
+    </mappers>
+</configuration>
