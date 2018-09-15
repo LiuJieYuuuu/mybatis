@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.myclass.Crm_ActivityDao">
+
+    <!--定义一个查询的语句，resultType指定返回值的类型-->
+    <select id="getActList" resultType="crm_Activity" parameterType="crm_Activity">
+        select a.actid,a.actplace,a.acttime,a.actname,c.classname,t.teaname
+        from crm_activity a,crm_class c,crm_teacher t
+        where a.actclassid=c.classno and a.actteacherid=t.teaid
+        <if test="actTeacherId !=null and actTeacherId != ''">
+            and a.actTeacherId=#{actTeacherId}
+        </if>
+        <if test="actClassId != null and actClassId !=''">
+            and a.actClassId=#{actClassId}
+        </if>
+    </select>
+
+    <insert id="addAct" parameterType="crm_Activity">
+        insert into crm_activity(actId,actClassId,actPlace,actTime,actName,actTeacherId)
+        values(seq_actid.nextval,#{actClassId},#{actPlace},#{actTime},#{actName},#{actTeacherId})
+    </insert>
+
+    <update id="updateAct" parameterType="crm_Activity" >
+        update crm_activity
+        set actClassId=#{actClassId},actPlace=#{actPlace},actTime=#{actTime},actName=#{actName},actTeacherId=#{actTeacherId}
+        where actId=#{actId}
+    </update>
+
+    <select id="getActById" parameterType="java.lang.Integer" resultType="crm_Activity">
+        select * from crm_activity where actId=#{actId}
+    </select>
+
+    <delete id="deleteAct" parameterType="java.lang.Integer">
+        delete from crm_activity where actid=#{actId}
+    </delete>
+</mapper>

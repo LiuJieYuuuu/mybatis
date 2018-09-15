@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.pagedao.InterviewMDao">
+    <select id="getInterviewList" resultType="com.crm.pojo.pagepojo.InterviewM">
+        select i.*,t.tname,c.className,e.name from INTERVIEWM i,CRM_TRA t,CRM_Class c,ENTERPRISEM e where i.studentNo=t.traid and i.classNo=c.classNo and i.ieno=e.id
+    </select>
+    <select id="getInterviewListByResult" resultType="com.crm.pojo.pagepojo.InterviewM">
+        select i.*,t.tname,c.className,e.name from INTERVIEWM i,CRM_TRA t,CRM_Class c,ENTERPRISEM e where i.studentNo=t.traid and i.classNo=c.classNo and i.ieno=e.id and i.iResult=#{iResult}
+    </select>
+    <select id="getEnterpriseNames" resultType="com.crm.pojo.pagepojo.EnterpriseM">
+        select e.id,e.name from EnterpriseM e
+    </select>
+    <select id="getStudentNames" resultType="com.crm.pojo.TraPojo.Trainee">
+        select c.traid,c.tname from CRM_tra c
+    </select>
+    <select id="getClassNames" resultType="com.crm.pojo.myclass.Crm_Class">
+        select t.classNo,t.classname from CRM_class t
+    </select>
+    <insert id="addInterview" parameterType="com.crm.pojo.pagepojo.InterviewM">
+        insert into INTERVIEWM values (SEQ_interview.nextval,#{classNo},#{studentNo},#{iTime},#{ieNo},#{iContent},#{iLoc},#{iResult})
+    </insert>
+    <select id="getInterviewById" resultType="com.crm.pojo.pagepojo.InterviewM">
+        select * from INTERVIEWM where id=#{id}
+    </select>
+    <update id="updateInterview" parameterType="com.crm.pojo.pagepojo.InterviewM">
+        update INTERVIEWM set classno=#{classNo},studentno=#{studentNo},itime=#{iTime},ieno=#{ieNo},icontent=#{iContent},iloc=#{iLoc},iresult=#{iResult} where id=#{id}
+    </update>
+</mapper>

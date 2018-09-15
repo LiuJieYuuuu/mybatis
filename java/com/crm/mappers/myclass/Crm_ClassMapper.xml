@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.myclass.Crm_ClassDao">
+
+    <!--定义一个查询的语句，resultType指定返回值的类型-->
+    <select id="getClassList" resultType="crm_Class">
+        select c.classno,c.classname from crm_class c
+    </select>
+
+    <select id="getAllClass" resultType="crm_Class">
+        select * from crm_class
+    </select>
+
+    <insert id="addClass" parameterType="crm_Class">
+        insert into crm_class(classNo,className,javaTeaId,mindTeaid)
+        values(seq_classNo.nextval,#{className},#{javaTeaId},#{mindTeaId})
+    </insert>
+
+    <select id="getAllTraineeByClassName" parameterType="java.lang.String" resultType="trainee">
+        select c.traid,c.tname from crm_tra c where traclass = #{className}
+    </select>
+
+    <select id="getClassNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select c.className from crm_class c where classNo=#{classNo}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.hcDao.ResultDao">
+    <select id="getResultList" resultType="result">
+        select * from crm_result
+    </select>
+    <insert id="addResult" parameterType="result">
+        insert into crm_result(resultid,resulttype) values(seq_result_id.nextval,#{resulttype})
+    </insert>
+
+    <update id="updateStatus2" parameterType="Integer">
+        update crm_result set resultstatus=#{resultstatus} where resultid=#{resultid}
+    </update>
+
+    <update id="updateResult" parameterType="result">
+        update crm_result set resulttype=#{resulttype} where resultid=#{resultid}
+    </update>
+
+
+</mapper>

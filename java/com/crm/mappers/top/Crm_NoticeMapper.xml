@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.top.RCrm_NoticeDao">
+    <!--开启二级缓存-->
+    <cache ></cache>
+    <!--<resultMap id="deptMapper" type="dept">
+        <result property="deptloc" column="loc"></result>
+    </resultMap>
+    <resultMap id="selectEmpInfo" type="com.mbatis.pojo.DeptEmpView">
+        <result property="deptloc" column="loc"></result>
+    </resultMap>-->
+    <!--连表查询，先创建一个返回结果集的类-->
+    <!--<select id="selectEmpInfo" resultMap="selectEmpInfo">
+        select e.empno,e.ename,e.sal,e.job,d.deptno,d.dname,d.loc from emp e,dept d where e.deptno = d.deptno
+    </select>
+    <select id="selectDept" resultType="dept">
+        select * from dept
+    </select>
+    <select id="selectDept2" resultMap="deptMapper">
+        select * from dept
+    </select>
+    <insert id="addDept" parameterType="dept">
+        insert into Dept(deptno,dname,loc)
+        values(DEQDEPT.nextval,#{dname},#{loc})
+    </insert>
+    <select id="getDeptByNo" resultType="dept" parameterType="java.lang.Integer">
+        select * from dept where deptno=#{deptno}
+    </select>-->
+    <select id="selCrm_noticeS" resultType="com.crm.pojo.top.Crm_Notice">
+        select * from (select c.*,rownum r from (select * from CRM_NOTICE order by ntime desc)c)a where a.r &lt; 9
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crm.dao.system.LogjDao">
+
+    <resultMap id="getUser" type="adminUser">
+        <id property="auid" column="auid"></id>
+        <result property="auname" column="auname"></result>
+    </resultMap>
+
+    <resultMap id="selectUserLog" type="logj">
+        <id property="logid" column="logid"></id>
+        <result property="auid" column="la"></result>
+        <result property="incident" column="incident"></result>
+        <result property="ltime" column="ltime"></result>
+        <result property="lip" column="lip"></result>
+        <association property="adminUser" resultMap="getUser"></association>
+    </resultMap>
+
+    <insert id="addLogj">
+        insert into logj values(seq_logid.nextval,#{auid},#{incident},sysdate,#{lip})
+    </insert>
+
+    <select id="getAllLogjs" resultMap="selectUserLog">
+        select l.logid,l.auid la,l.incident,l.ltime,l.lip,a.auid,a.auname from logj l,adminuser a where l.auid=a.auid
+    </select>
+</mapper>

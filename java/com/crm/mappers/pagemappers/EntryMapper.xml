@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.pagedao.EntryMDao">
+    <select id="getEntryList" resultType="com.crm.pojo.pagepojo.EntryM">
+        select m.*,t.tname,c.className,e.name from ENTRYM m,CRM_TRA t,CRM_Class c,ENTERPRISEM e where m.studentNo=t.traid and m.classNo=c.classNo and m.eeNo=e.id
+    </select>
+    <select id="getEntryListById" resultType="com.crm.pojo.pagepojo.EntryM">
+        select m.*,t.tname,c.className,e.name from ENTRYM m,CRM_TRA t,CRM_Class c,ENTERPRISEM e where m.studentNo=t.traid and m.classNo=c.classNo and m.eeNo=e.id and eeNo=#{eeNo}
+    </select>
+    <insert id="addEntry" parameterType="com.crm.pojo.pagepojo.EntryM">
+        insert into ENTRYM values (SEQ_ENTRY.nextval,#{classNo},#{studentNo},#{eeNo},#{eTime},#{sal},#{back})
+    </insert>
+    <select id="getEntryById" resultType="com.crm.pojo.pagepojo.EntryM">
+        select * from ENTRYM where id=#{id}
+    </select>
+    <update id="updateEntry" parameterType="com.crm.pojo.pagepojo.EntryM">
+        update ENTRYM set classNo=#{classNo},studentNo=#{studentNo},eeNo=#{eeNo},eTime=#{eTime},sal=#{sal},back=#{back} where id=#{id}
+    </update>
+</mapper>

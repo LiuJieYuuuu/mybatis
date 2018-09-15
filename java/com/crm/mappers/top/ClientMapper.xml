@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.top.RClientDao">
+    <select id="selClientS" resultType="java.lang.Integer">
+        select count(cliid) from CRM_CLIENT where clistatus = 1
+        <if test="username !='admin'">
+            and clicreater = #{username}
+        </if>
+    </select>
+    <select id="selClientW" resultType="java.lang.Integer">
+        select count(cliid) from CRM_CLIENT where clicreatetime &gt;= TRUNC(SYSDATE, 'MM') and clicreatetime &lt;= last_day(SYSDATE) and clistatus = 1
+        <if test="username != 'admin'">
+            and clicreater = #{username}
+        </if>
+    </select>
+    <select id="selClientY" resultType="java.lang.Integer">
+        select count(cliid) from CRM_CLIENT where clicreatetime &gt;= TRUNC(SYSDATE, 'MM') and clicreatetime &lt;= last_day(SYSDATE) and clistatus = 2
+        <if test="username != 'admin'">
+            and clicreater = #{username}
+        </if>
+    </select>
+    <select id="selClientCook" resultType="com.crm.pojo.top.Cookies">
+        select to_char(clicreatetime,'yyyy-mm') months,count(*) numbers from CRM_CLIENT where clicreatetime &gt;= add_months(SYSDATE, -12) and clicreatetime &lt;= last_day(SYSDATE)
+        <if test="username != 'admin'">
+            and clicreater = #{username}
+        </if>
+        group by to_char(clicreatetime,'yyyy-mm') order by to_char(clicreatetime,'yyyy-mm')
+    </select>
+    <select id="selClientOk" resultType="com.crm.pojo.top.Client">
+        select * from CRM_CLIENT where  clistatus = 2
+        <if test="username != 'admin'">
+            and clicreater = #{username}
+        </if>
+    </select>
+    <select id="selClientBad" resultType="com.crm.pojo.top.Client">
+        select * from CRM_CLIENT where  clistatus = 1
+        <if test="username != 'admin'">
+            and clicreater = #{username}
+        </if>
+    </select>
+</mapper>

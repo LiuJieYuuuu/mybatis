@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.myclass.Crm_TeacherDao">
+
+    <!--定义一个查询的语句，resultType指定返回值的类型-->
+    <select id="getTeaList" resultType="crm_Teacher">
+        select * from crm_teacher
+    </select>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.myclass.Crm_ScoreDao">
+    <!--批量插入-->
+    <insert id="insertScoreList" parameterType="java.util.List">
+        BEGIN
+        <foreach collection="list" item="Crm_Score" index="index" separator="">
+            INSERT INTO crm_score
+            (scoreid, reviewid, traid)
+            VALUES
+            (seq_scoreid.nextval,seq_reviewid.currval, #{Crm_Score.traId});
+        </foreach>
+        END;
+    </insert>
+
+    <!--批量打分-->
+    <update id="updateScoreList" parameterType="java.util.List">
+        update crm_score
+        set  score=
+        <foreach collection="list" item="item" index="index"
+                 separator=" " open="case scoreId" close="end">
+            when #{item.scoreId} then #{item.score}
+        </foreach>
+        where scoreId in
+        <foreach collection="list" index="index" item="item"
+                 separator="," open="(" close=")">
+            #{item.scoreId,jdbcType=INTEGER}
+        </foreach>
+    </update>
+
+
+    <select id="getScoreList" resultType="crm_Score" parameterType="java.lang.Integer">
+        select s.scoreid,t.tname,r.reviewtime,e.teaname,s.score
+        from crm_score s,crm_review r,crm_tra t,crm_teacher e
+        where s.reviewid=r.reviewid and s.traid=t.traid and e.teaid=r.reviewteaid
+        and s.reviewid=#{reviewId}
+
+    </select>
+</mapper>

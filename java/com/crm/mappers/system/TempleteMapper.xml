@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crm.dao.system.TempleteDao">
+
+    <resultMap id="allTemps" type="temp">
+        <id property="tpid" column="tpid"></id>
+        <result property="tpname" column="tpname"></result>
+        <collection property="list" ofType="etemp">
+            <id property="etpid" column="etpid"></id>
+            <result property="etpname" column="etpname"></result>
+            <result property="etpaddress" column="etpaddress"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getTempletes" resultMap="allTemps">
+        select t.* ,e.etpid,e.etpname,e.etpaddress from templete t left join etemp e on t.tpid=e.tpid
+    </select>
+
+    <insert id="addFTemplete" >
+        insert into templete values(seq_tempid.nextval,#{tpname})
+    </insert>
+
+    <insert id="addEtemp">
+        insert into etemp values(seq_etmid.nextval,#{etpname},#{etpaddress},#{tpid})
+    </insert>
+
+    <select id="getEtempInfo" resultType="etemp">
+        select * from etemp where etpid=#{etpid}
+    </select>
+
+    <update id="updateEtemp">
+        update etemp set etpname=#{etpname},etpaddress=#{etpaddress},tpid=#{tpid} where etpid=#{etpid}
+    </update>
+
+    <select id="getTemplete" resultType="temp">
+        select * from templete where tpid=#{tpid}
+    </select>
+
+    <update id="updateFtemp">
+        update templete set tpname=#{tpname} where tpid=#{tpid}
+    </update>
+
+    <delete id="deleteFtemp">
+        delete from templete where tpid=#{tpid}
+    </delete>
+
+    <delete id="deleteEtemp">
+        delete from etemp where etpid=#{etpid}
+    </delete>
+</mapper>

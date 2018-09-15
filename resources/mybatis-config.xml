@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 开启二级缓存，默认是false -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 全局启用或禁用延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 需要时才加载,true情况调用本表数据也会加载外表 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- value可为STDOUT_LOGGING即可打印带控制台-->
+        <setting name="logImpl" value="LOG4J" />
+    </settings>
+    <!-- 别名区 -->
+    <typeAliases>
+        <typeAlias type="com.crm.pojo.system.AdminUser" alias="adminUser"></typeAlias>
+        <typeAlias type="com.crm.pojo.system.Templete" alias="temp"></typeAlias>
+        <typeAlias type="com.crm.pojo.system.Etemp" alias="etemp"></typeAlias>
+        <typeAlias type="com.crm.pojo.system.Logj" alias="logj"></typeAlias>
+        <typeAlias type="com.crm.pojo.hcpojo.Result" alias="result"></typeAlias>
+        <typeAlias type="com.crm.pojo.hcpojo.Way" alias="way"></typeAlias>
+        <typeAlias type="com.crm.pojo.hcpojo.Client" alias="client"></typeAlias>
+        <typeAlias type="com.crm.pojo.TraPojo.Trainee" alias="trainee"></typeAlias>
+        <typeAlias type="com.crm.pojo.notice.Crm_Notice" alias="crm_Notice"></typeAlias>
+        <typeAlias type="com.crm.pojo.myclass.Crm_Activity" alias="crm_Activity"></typeAlias>
+        <typeAlias type="com.crm.pojo.myclass.Crm_Class" alias="crm_Class"></typeAlias>
+        <typeAlias type="com.crm.pojo.myclass.Crm_Teacher" alias="crm_Teacher"></typeAlias>
+        <typeAlias type="com.crm.pojo.myclass.Crm_Review" alias="crm_Review"></typeAlias>
+        <typeAlias type="com.crm.pojo.myclass.Crm_Score" alias="crm_Score"></typeAlias>
+    </typeAliases>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="oracle"/>
+            <property name="offsetAsPageNum" value="false"/>
+            <property name="rowBoundsWithCount" value="false"/>
+            <property name="pageSizeZero" value="true"/>
+            <property name="reasonable" value="false"/>
+            <property name="supportMethodsArguments" value="false"/>
+            <property name="returnPageInfo" value="none"/>
+        </plugin>
+    </plugins>
+
+
+</configuration>

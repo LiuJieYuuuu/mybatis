@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.pagedao.enterpriseMDao">
+    <insert id="addEnterprise" parameterType="com.crm.pojo.pagepojo.EnterpriseM">
+        insert into ENTERPRISEM values (SEQ_enterprise.nextval,#{name},#{loc},#{tel},#{isPartner})
+    </insert>
+    <select id="getEnterpriseList" resultType="com.crm.pojo.pagepojo.EnterpriseM">
+        select * from ENTERPRISEM
+    </select>
+    <select id="getEnterpriseById" resultType="com.crm.pojo.pagepojo.EnterpriseM">
+        select * from ENTERPRISEM where id=#{id}
+    </select>
+    <update id="updateEnterprise" parameterType="com.crm.pojo.pagepojo.EnterpriseM">
+        update ENTERPRISEM set name=#{name},loc=#{loc},tel=#{tel},isPartner=#{isPartner} where id=#{id}
+    </update>
+    <select id="getEnterpriseListByName" resultType="com.crm.pojo.pagepojo.EnterpriseM">
+        select * from ENTERPRISEM where name like #{name}
+    </select>
+</mapper>

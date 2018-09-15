@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.notice.Crm_NoticeDao">
+
+    <!--定义一个查询的语句，resultType指定返回值的类型-->
+    <select id="getNoticeList" parameterType="crm_Notice" resultType="crm_Notice">
+        select * from crm_notice where 1=1
+        <if test="ntitle != null and ntitle != ''">
+            and ntitle like #{ntitle}
+        </if>
+        <if test="ncontent !=null and ncontent !=''">
+            and ncontent like #{ncontent}
+        </if>
+        <if test="npublisher !=null and npublisher !=''">
+            and npublisher like #{npublisher}
+        </if>
+    </select>
+
+    <delete id="delNotice" parameterType="java.lang.Integer">
+        delete from crm_notice where nid = #{nid}
+    </delete>
+
+    <insert id="addNotice" parameterType="crm_Notice">
+        insert into crm_notice(nid,ntitle,ncontent,npublisher,ntime) values (seq_notice_nid.nextval,#{ntitle},#{ncontent},#{npublisher},sysdate)
+    </insert>
+
+    <update id="updateNotice" parameterType="crm_Notice" >
+        update crm_notice set ntitle=#{ntitle} and ncontent={#ncontent} where nid={#nid }
+    </update>
+
+    <select id="getNoticeById" parameterType="java.lang.Integer" resultType="crm_Notice">
+        select * from crm_notice where nid=#{nid}
+    </select>
+</mapper>

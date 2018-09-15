@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.myclass.Crm_ReviewDao">
+
+    <!--定义一个查询的语句，resultType指定返回值的类型-->
+    <select id="getReviewList" resultType="crm_Review" parameterType="crm_Review">
+        select r.reviewid,r.reviewname,r.reviewclassid,r.reviewtime,r.reviewteaid,c.classname,t.teaname
+        from CRM_REVIEW r,crm_class c,crm_teacher t
+        where r.reviewClassId=c.classno and r.reviewTeaId=t.teaid
+        <if test="reviewClassId !=null and reviewClassId != ''">
+            and r.reviewClassId =#{reviewClassId}
+        </if>
+        <if test="reviewTeaId != null and reviewTeaId !=''">
+            and r.reviewTeaId=#{reviewTeaId}
+        </if>
+
+    </select>
+
+    <insert id="addReview" parameterType="crm_Review">
+        insert into crm_review(reviewId,reviewName,reviewClassId,reviewTime,reviewTeaId)
+        values(seq_reviewid.nextval,#{reviewName},#{reviewClassId},#{reviewTime},#{reviewTeaId})
+    </insert>
+
+    <delete id="delReview" parameterType="java.lang.Integer">
+        delete from crm_review where reviewId=#{reviewId}
+    </delete>
+</mapper>

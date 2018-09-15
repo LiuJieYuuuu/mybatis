@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crm.dao.hcDao.ClientDao">
+    <select id="getClientList" resultType="client">
+        select * from crm_client where 1=1
+        <if test="cliname != null and cliname != ''">
+            and cliname like #{cliname}
+        </if>
+        <if test="center != null and center != ''">
+            and center = #{center}
+        </if>
+        <if test="clistatus != null and clistatus != ''">
+            and clistatus = #{clistatus}
+        </if>
+    </select>
+
+    <insert id="addClient" parameterType="client">
+        insert into crm_client(cliid,cliname,clitel,clischool,clicreater,cliresultor,clicity,center,cliway,cliattitude)
+        values(seq_client_id.nextval,#{cliname},#{clitel},#{clischool},#{clicreater},#{cliresultor},#{clicity},#{center},#{cliway},#{cliattitude})
+    </insert>
+
+    <update id="updateClient" parameterType="client">
+        update crm_client set cliname=#{cliname},clitel=#{clitel},clischool=#{clischool},clicreater=#{clicreater},cliresultor=#{cliresultor},clicity=#{clicity},center=#{center},cliway=#{cliway},clistatus=#{clistatus},cliattitude=#{cliattitude} where cliid=#{cliid}
+    </update>
+
+    <insert id="addTrainee" parameterType="trainee">
+        insert into crm_tra(traid,tname,trasex,traschool,tratel,traqq)
+        values(#{traid},#{tname},#{trasex},#{traschool},#{tratel},#{traqq})
+    </insert>
+</mapper>
