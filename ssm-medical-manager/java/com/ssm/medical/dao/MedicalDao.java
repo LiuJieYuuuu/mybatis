@@ -1,6 +1,7 @@
 package com.ssm.medical.dao;
 
 import com.ssm.medical.pojo.MedClassify;
+import com.ssm.medical.pojo.Medical;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -41,4 +42,11 @@ public interface MedicalDao {
      * @return
      */
     boolean updatemClassify(MedClassify medClassify);
+
+    /**
+     * 添加药品信息
+     * @param medical
+     * @return
+     */
+    int addmedical(Medical medical);
 }

@@ -1,6 +1,7 @@
 package com.ssm.medical.service;
 
 import com.ssm.medical.pojo.MedClassify;
+import com.ssm.medical.pojo.Medical;
 
 import java.util.List;
 

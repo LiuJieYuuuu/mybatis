@@ -1,5 +1,5 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -61,66 +61,50 @@
 			<tr>
 				<td bgcolor="#FFFFFF" height="50">
 					<br>
-    <form action="baseData/med.do" method="post" focus="name" enctype="multipart/form-data" onsubmit="return save();">
+    <form action="/medical/addmedicalInfo" method="post" focus="name" enctype="multipart/form-data" onsubmit="return save();">
     	<input type="hidden" name="command" value="add" />
     	<input type="hidden" name="id"/>
       <table border="0" align="center" width="450">
         <tr>
           <td align="right">药品编码：</td>
-          <td align="left"><input type="text" name="medNo" /></td>
+          <td align="left"><input type="text" name="mino" /></td>
         </tr>
         <tr>
           <td align="right">药品名称：</td>
-          <td align="left"><input type="text" name="name" /></td>
+          <td align="left"><input type="text" name="miname" /></td>
         </tr>
         <tr>
           <td align="right">单价：</td>
-          <td align="left"><input type="text" name="price" /></td>
+          <td align="left"><input type="text" name="miprice" /></td>
         </tr>
         <tr>
           <td align="right">库存数量：</td>
-          <td align="left"><input type="text" name="medCount"/></td>
+          <td align="left"><input type="text" name="mireport"/></td>
         </tr>
         <tr>
           <td align="right">所属类别：</td>
           <td align="left">
-          <logic:present name="cs" scope="request">
-          	<select name="categoryId" id="categoryId">
-	          	
-	          		<iterate id="ele" name="cs" scope="request">
-	          			<logic:equal value="${ele.id}" name="medForm" property="categoryId" >
-		          			<option value="<bean:write name='ele' property='id' />" selected>
-								<bean:write name="ele" property="name"/>
-							</option>
-						</logic:equal>
-						<logic:notEqual value="${ele.id}" name="medForm" property="categoryId">
-		          			<option value="<bean:write name='ele' property='id' />">
-								<bean:write name="ele" property="name"/>
-							</option>
-						</logic:notEqual>
-	          		</iterate>
-	          	
-	          	<logic:empty name="cs" scope="request">
-	          		<option value="-1" ><bean:message key="medicine.category.null" /></option>
-	          	</logic:empty>
-          	</select>
-          </logic:present>
+              <select name="mcid" id="categoryId">
+                <c:forEach var="temp" items="${list}">
+                    <option value="${temp.mcid}">${temp.mcname}</option>
+                </c:forEach>
+              </select>
           </td>
         </tr>
         <tr>
           <td align="right">图片：</td>
           <td align="left">
-          	<input type="file" name="photo" />
+          	<input type="file" name="img" />
           	<input type="hidden" name="photoPath"/>
           </td>
         </tr>
         <tr>
           <td align="right">出场地址：</td>
-          <td align="left"><textarea name="factoryAdd" cols="30" rows="3"></textarea></td>
+          <td align="left"><textarea name="miaddress" cols="30" rows="3"></textarea></td>
         </tr>
         <tr>
           <td align="right">描述：</td>
-          <td align="left"><textarea name="description" cols="30" rows="3"></textarea></td>
+          <td align="left"><textarea name="mides" cols="30" rows="3"></textarea></td>
         </tr>
         <tr>
           <td colspan="2" align="center"><input type="submit" value="提交"/></td>
