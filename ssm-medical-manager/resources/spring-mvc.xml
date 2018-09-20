@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <mvc:annotation-driven/>
+    <!-- 启用注解 -->
+    <context:annotation-config />
+    <!-- 打开注解扫描 -->
+    <context:component-scan base-package="com.ssm.medical.handler"></context:component-scan>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--拦截所有请求-->
+            <mvc:mapping path="/**"/>
+            <!--不拦截的请求-->
+            <mvc:exclude-mapping path="/login2.jsp"/>
+            <mvc:exclude-mapping path="/login.jsp"/>
+            <mvc:exclude-mapping path="/**/fonts/*"/>
+            <mvc:exclude-mapping path="/**/*.css"/>
+            <mvc:exclude-mapping path="/**/*.js"/>
+            <mvc:exclude-mapping path="/**/*.png"/>
+            <mvc:exclude-mapping path="/**/*.gif"/>
+            <mvc:exclude-mapping path="/**/*.jpg"/>
+            <mvc:exclude-mapping path="/**/*.jpeg"/>
+            <mvc:exclude-mapping path="/**/*Login*"/>
+            <bean class="com.ssm.medical.handler.MyHandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!-- 跳过静态文件(图片js、样式等) -->
+    <mvc:resources location="/images/" mapping="/images/**" />
+    <mvc:resources location="/upload/" mapping="/upload/**" />
+
+</beans>

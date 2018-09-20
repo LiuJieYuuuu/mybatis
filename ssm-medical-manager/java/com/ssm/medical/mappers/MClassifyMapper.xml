@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssm.medical.dao.MedicalDao">
+
+    <select id="getM_classifys" resultType="com.ssm.medical.pojo.MedClassify">
+        select * from m_classify
+    </select>
+
+    <insert id="addM_classify">
+        insert into m_classify(mcname,mcdes) values(#{mcname},#{mcdes})
+    </insert>
+
+    <delete id="deletemClassify">
+        delete from m_classify where mcid=#{mcid}
+    </delete>
+
+    <select id="getmClassify" resultType="com.ssm.medical.pojo.MedClassify">
+        select * from m_classify where mcid=#{mcid}
+    </select>
+
+    <update id="updatemClassify">
+        update m_classify set mcname=#{mcname} , mcdes=#{mcdes} where mcid=#{mcid}
+    </update>
+</mapper>
