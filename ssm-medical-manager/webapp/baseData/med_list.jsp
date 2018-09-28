@@ -1,7 +1,5 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-
-
-
+<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -66,24 +64,26 @@
         
     	<form action="" method='post'>
      	<iterate id="ele" name="list" scope="request">
+			<c:forEach items="${list}" var="temp">
      		<tr bgcolor="#FFFFFF">
      			<td>
      				<input type="hidden" name="allId" value='<bean:write name="ele" property="id" />'>
 					<input type="checkbox" name="selectedId" value='<bean:write name="ele" property="id" />'>
 				</td>
-     			<td>1</td>
-     			<td>abc123</td>
-     			<td>感冒胶囊</td>
-     			<td>10元</td>
-     			<td>10</td>
-     			<td>0</td>
-     			<td>制药一场</td>
+     			<td>${temp.miid}</td>
+     			<td>${temp.mino}</td>
+     			<td>${temp.miname}</td>
+     			<td>${temp.miprice}元</td>
+     			<td>${temp.mireport}</td>
+     			<td>${temp.mirequire}</td>
+     			<td>${temp.miaddress}</td>
      			<td>
      				<a href="#">进货</a>
-     				<a href="#">修改</a>
+     				<a href="/baseData/med_view.jsp">修改</a>
      				<a href="#">购买</a>
      			</td>
      		</tr>
+			</c:forEach>
      	</iterate>
      	<tr bgcolor="#FFFFFF">
       

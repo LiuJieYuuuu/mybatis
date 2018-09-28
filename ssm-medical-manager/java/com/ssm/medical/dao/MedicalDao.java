@@ -49,4 +49,10 @@ public interface MedicalDao {
      * @return
      */
     int addmedical(Medical medical);
+
+    /**
+     * 获取所有药品信息
+     * @return
+     */
+    List<Medical> getMedicalInfo();
 }

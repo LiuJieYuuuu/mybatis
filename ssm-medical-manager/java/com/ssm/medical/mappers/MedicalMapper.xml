@@ -9,4 +9,8 @@
         insert into m_info(mino,miname,miprice,mireport,mirequire,miaddress,mcid,mides,miimg)
         values (#{mino},#{miname},#{miprice},#{mireport},#{mirequire},#{miaddress},#{mcid},#{mides},#{miimg})
     </insert>
+
+    <select id="getMedicalInfo" resultType="com.ssm.medical.pojo.Medical">
+        select * from m_info
+    </select>
 </mapper>

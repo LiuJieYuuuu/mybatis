@@ -49,12 +49,7 @@
 				<table width="80%" align="center">
 					<tr>
 						<td height="22" onmouseover="this.style.backgroundColor='#ffffff'" onmouseout="this.style.backgroundColor=''">
-							<a href="baseData/med_add.jsp" target="main" class="sub1">添加药品</a>
-						</td>
-					</tr>
-					<tr>
-						<td height="22" onmouseover="this.style.backgroundColor='#ffffff'" onmouseout="this.style.backgroundColor=''">
-							<a href="baseData/med_list.jsp" target="main" class="sub1">
+							<a href="/medical/getMedicalInfo" target="main" class="sub1">
 								查看药品
 							</a>
 						</td>

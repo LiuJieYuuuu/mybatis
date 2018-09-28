@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -93,5 +94,16 @@ public class MedicalHandler {
             e.printStackTrace();
         }
         return "redirect:/medical/MedClassify";
+    }
+
+    /**
+     * 遍历所有药品信息
+     * @return
+     */
+    @RequestMapping("medical/getMedicalInfo")
+    public String getMedicalInfo(HttpServletRequest request){
+        List<Medical> list=medicalServiceimpl.getMedicalInfo();
+        request.setAttribute("list",list);
+        return "baseData/med_list";
     }
 }

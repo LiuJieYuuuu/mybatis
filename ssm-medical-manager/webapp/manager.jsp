@@ -8,7 +8,9 @@
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 	</head>
-	
+	<c:if test="${adminuser==null}">
+		<script>alert("未登录！");location.href='/login.jsp';</script>
+	</c:if>
 	
 		<frameset rows="180,*" cols="*" framespacing="0" frameborder="no"
 			border="0">
@@ -16,7 +18,7 @@
 			<frameset rows="*" cols="223,*" framespacing="0" frameborder="no"
 				border="0">
 				<frame src="left.jsp" name="left">
-				<frame src="baseData/med_list.jsp" name="main">
+				<frame src="/medical/getMedicalInfo" name="main">
 			</frameset>
 		</frameset>
 		<noframes>
