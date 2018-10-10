@@ -34,6 +34,7 @@ public class MyExeptionHandler {
         request.setAttribute("javax.servlet.error.status_code",500);
         map.put("code","user.notexist");
         map.put("message",e.getMessage());
+        request.setAttribute("ext",map);
         return "forward:/error";
     }
 }
