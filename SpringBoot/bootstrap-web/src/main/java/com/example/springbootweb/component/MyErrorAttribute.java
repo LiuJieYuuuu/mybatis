@@ -7,7 +7,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Map;
 
 @Component
-public class MyErrorAttribute extends DefaultErrorAttributes{
+public class MyErrorAttribute extends DefaultErrorAttributes {
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
         Map<String, Object> map=super.getErrorAttributes(webRequest, includeStackTrace);
